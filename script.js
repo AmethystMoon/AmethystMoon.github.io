@@ -138,6 +138,7 @@ function createInitialBoardState() {
   for(var i = 0; i <= 10; i++) {
     boardState.push([])
   }
+  /*Normal Board Setup*/
   boardState[0] = [0,0,0,0,0,0]
   boardState[1] = [2,0,0,0,0,0,1]
   boardState[2] = [8,2,0,0,0,0,1,7]
@@ -504,14 +505,14 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
-        if(sy > board[x].length-1) {
+        if(sy > board[sx].length-1) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
           continue
         }
         sy += 1
-        if(sy > board[x].length-1) {
+        if(sy > board[sx].length-1) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y)  && board[sx][sy] !== 0) {
@@ -523,7 +524,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -533,7 +534,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         if(sx > 5) {
           sy -= 1 
         }
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -545,7 +546,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -555,7 +556,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         if(sx < 5) {
           sy -= 1 
         }
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -567,7 +568,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
-        if(sy > board[x].length-2 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -577,7 +578,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         if(sx >= 5) {
           sy += 1 
         }
-        if(sy > board[x].length-2 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -589,7 +590,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -599,7 +600,7 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         if(sx <= 5) {
           sy += 1 
         }
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -640,14 +641,14 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
-        if(sy > board[x].length-1) {
+        if(sy > board[sx].length-1) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
           continue
         }
         sy += 1
-        if(sy > board[x].length-1) {
+        if(sy > board[sx].length-1) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -659,7 +660,7 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -669,7 +670,7 @@ function rookBehaviour(x,y,arr,board) {
         if(sx > 5) {
           sy -= 1 
         }
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -681,7 +682,7 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -691,7 +692,7 @@ function rookBehaviour(x,y,arr,board) {
         if(sx < 5) {
           sy -= 1 
         }
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -703,7 +704,7 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
-        if(sy > board[x].length-2 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -713,7 +714,7 @@ function rookBehaviour(x,y,arr,board) {
         if(sx >= 5) {
           sy += 1 
         }
-        if(sy > board[x].length-2 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
@@ -725,20 +726,32 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
+          if(x==0) {
+            console.log(1)
+          }
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
+          if(x==0) {
+            console.log(2)
+          }
           continue
         }
         sx += 1
         if(sx <= 5) {
           sy += 1 
         }
-        if(sy > board[x].length-1 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
+          if(x==0) {
+            console.log(3)
+          }
           continue
         }
         if((board[sx][sy] % 2 == tmod && (sx !== x || sy !== y)) && board[sx][sy] !== 0) {
+          if(x==0) {
+            console.log(4)
+          }
           continue
         }
         arr.push([sx,sy])
@@ -1118,7 +1131,7 @@ function filterMovementsInCheck(x,y,moves) {
   }
   return newmoves
 }
-// Here I've extracted the queen and king behaviors into separate functions for readability
+
 function queenBehaviour(i, j, moves,board) {
   bishopBehaviour(i, j, moves,board);
   rookBehaviour(i, j, moves,board);
@@ -1238,7 +1251,6 @@ c.addEventListener('click', function(event) {
     var piece = piecePositions[i];
     if (x >= piece.x && x <= piece.x + piece.width && y >= piece.y && y <= piece.y + piece.height) {
       // Click was on this piece
-      console.log("You clicked on " + piece.name);
       // Clear all piece positions to remove the promotion choices
       piecePositions = [];
       promotionInProgress = false;
@@ -1323,7 +1335,6 @@ function pawnPromotion() {
   // Array indexes for 'White Bishop', 'White Knight', 'White Rook', and 'White Queen'
 
   for(i = 0; i < 10; i++) {
-    console.log(boardState[i][boardState[i].length-1])
     if(boardState[i][0] == 1) {
       var pieceIndexes = [2, 4, 6, 8];
       var pieceNames = ['White Bishop', 'White Knight', 'White Rook', 'White Queen']; 
