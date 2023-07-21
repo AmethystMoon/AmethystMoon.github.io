@@ -1304,7 +1304,7 @@ function findTile(x, y) {
       var dx = x - hexpositions[i][j][0];
       var dy = y - hexpositions[i][j][1];
       var distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < bS / 2) {
+      if (distance < bS / 1.5) {
         return [i, j];
       }
     }
