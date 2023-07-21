@@ -236,6 +236,7 @@ function drawBoardState() {
 }
 
 validmoves = []
+passantPawn = []
 function pawnBehaviour(x,y,arr,board) {
   if (turn === "white") {
     // Forward moves
@@ -267,8 +268,14 @@ function pawnBehaviour(x,y,arr,board) {
     if(leftMove && board[leftMove[0]][leftMove[1]] !== 0 && board[leftMove[0]][leftMove[1]] % 2 == 0 && board[leftMove[0]][leftMove[1]] !== 12) {
       arr.push(leftMove);
     }
+    if(leftMove[0] == passantPawn[0] && leftMove[1]+1 == passantPawn[1]) {
+      arr.push(leftMove)
+    }
     if(rightMove && board[rightMove[0]][rightMove[1]] !== 0 && board[rightMove[0]][rightMove[1]] % 2 == 0) {
       arr.push(rightMove);
+    }
+    if(rightMove[0] == passantPawn[0] && rightMove[1]+1 == passantPawn[1]) {
+      arr.push(rightMove)
     }
   } else { // turn === "black"
     if(board[x][y+1] == 0) { 
@@ -299,8 +306,14 @@ function pawnBehaviour(x,y,arr,board) {
     if(leftMove && board[leftMove[0]][leftMove[1]] !== 0 && board[leftMove[0]][leftMove[1]] % 2 == 1 && board[leftMove[0]][leftMove[1]] !== 11) {
       arr.push(leftMove);
     }
+    if(leftMove[0] == passantPawn[0] && leftMove[1]-1 == passantPawn[1]) {
+      arr.push(leftMove)
+    }
     if(rightMove && board[rightMove[0]][rightMove[1]] !== 0 && board[rightMove[0]][rightMove[1]] % 2 == 1) {
       arr.push(rightMove);
+    }
+    if(rightMove[0] == passantPawn[0] && rightMove[1]-1 == passantPawn[1]) {
+      arr.push(rightMove)
     }
   }
 }
@@ -1142,43 +1155,34 @@ function detectCheck(board) {
 }
 function detectCheckmate(board) {
   let tmod = (turn === 'white') ? 1 : 0;
-  console.log(tmod)
   allpossiblemoves = []
-  console.log("Next")
   for(var i = 0; i < board.length; i++) {
     for(var j = 0; j < board[i].length; j++) {
       let possiblemoves = [];
       type = board[i][j]
       // Call the appropriate behaviour function based on the piece type
       if((type === 1 || type === 2) && type % 2 == tmod) { //pawn behavior
-        console.log("Piece " + [i,j].toString())
         pawnBehaviour(i, j, possiblemoves,board);
       }
       if((type === 3 || type === 4) && type % 2 == tmod) { //bishop behavior
-        console.log("Piece " + [i,j].toString())
         bishopBehaviour(i, j, possiblemoves,board);
       }
       if((type === 5 || type === 6) && type % 2 == tmod) { //knight behavior
-        console.log("Piece " + [i,j].toString())
         knightBehaviour(i, j, possiblemoves,board);
       }
       if((type === 7 || type === 8) && type % 2 == tmod) { //rook behavior\
-        console.log("Piece " + [i,j].toString())
         rookBehaviour(i, j, possiblemoves,board);
       }
       if((type === 9 || type === 10) && type % 2 == tmod) { //queen behavior
-        console.log("Piece " + [i,j].toString())
         queenBehaviour(i, j, possiblemoves,board);
       }
       if((type === 11 || type === 12) && type % 2 == tmod) { //king behavior
-        console.log("Piece " + [i,j].toString())
         kingBehaviour(i, j, possiblemoves,board);
       }
 
       if(detectCheck(board)) {
         possiblemoves = filterMovementsInCheck(i,j,possiblemoves)
       }
-      console.log(possiblemoves)
       allpossiblemoves = allpossiblemoves.concat(possiblemoves);
     }
   }
@@ -1358,6 +1362,25 @@ c.addEventListener('click', function(event) {
     if(checkArrayInArray(validmoves,tile)) {
       cx = selectedPiece[0]
       cy = selectedPiece[1]
+      if(boardState[cx][cy] == 1) {
+        console.log(passantPawn[0] ==tile[0] && passantPawn[1] == tile[1]+1)
+        if(passantPawn[0] == tile[0] && passantPawn[1] == tile[1]+1) {
+          console.log(true)
+          boardState[passantPawn[0]][passantPawn[1]] = 0
+        }
+      }
+      if(boardState[cx][cy] == 2) {
+        if(passantPawn[0] == tile[0] && passantPawn[1] == tile[1]-1) {
+          boardState[passantPawn[0]][passantPawn[1]] = 0
+        }
+      }
+      passantPawn = []
+      if(boardState[cx][cy] == 1 && tile[1] == cy-2) {
+        passantPawn = [tile[0],tile[1]]
+      }
+      if(boardState[cx][cy] == 2 && tile[1] == cy+2) {
+        passantPawn = [tile[0],tile[1]]
+      }
       boardState[tile[0]][tile[1]] = boardState[cx][cy]
       boardState[cx][cy] = 0 
       if(turn == 'white') {
