@@ -1,0 +1,57 @@
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  #canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #email-link {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  #email-link:hover {
+    color: #eeeeee;
+  }
+  
+  #email-link .tooltip {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+  
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 0;
+    
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  #email-link:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    left: 0%; /* moves tooltip to the right */
+  }
+  
