@@ -164,7 +164,19 @@ function createInitialBoardState() {
   boardState[8] = [0,0,0,0,0,0,0,0]
   boardState[9] = [0,0,0,0,0,2,0]
   boardState[10] = [0,0,0,5,0,0] */
-  
+
+  /*Second Check In One Scenario */
+  /* boardState[0] = [0,0,0,0,0,0]
+  boardState[1] = [2,0,10,0,0,0,0]
+  boardState[2] = [0,0,2,0,0,0,0,0]
+  boardState[3] = [0,0,2,5,0,0,0,0,0]
+  boardState[4] = [0,0,0,2,0,1,0,0,0,0]
+  boardState[5] = [4,0,0,0,0,0,0,0,0,0,0]
+  boardState[6] = [12,0,0,0,0,0,0,0,4,11]
+  boardState[7] = [0,0,0,0,0,0,1,0,0]
+  boardState[8] = [0,2,9,0,0,0,1,0]
+  boardState[9] = [0,0,0,0,0,0,1]
+  boardState[10] = [0,0,0,0,0,0] */
 }
 createInitialBoardState()
 
@@ -486,6 +498,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy < 0) {
           continue
         }
@@ -505,6 +520,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1) {
           continue
         }
@@ -512,6 +530,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
           continue
         }
         sy += 1
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1) {
           continue
         }
@@ -524,6 +545,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -533,6 +557,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         sx += 1
         if(sx > 5) {
           sy -= 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -546,6 +573,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -555,6 +585,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         sx -= 1
         if(sx < 5) {
           sy -= 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -568,6 +601,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -577,6 +613,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         sx -= 1
         if(sx >= 5) {
           sy += 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -590,6 +629,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 1; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -599,6 +641,9 @@ function rookBehaviourAlteredForKing(x,y,arr,board) {
         sx += 1
         if(sx <= 5) {
           sy += 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -622,6 +667,9 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy < 0) {
           continue
         }
@@ -641,6 +689,9 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1) {
           continue
         }
@@ -648,6 +699,9 @@ function rookBehaviour(x,y,arr,board) {
           continue
         }
         sy += 1
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1) {
           continue
         }
@@ -660,6 +714,9 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -669,6 +726,9 @@ function rookBehaviour(x,y,arr,board) {
         sx += 1
         if(sx > 5) {
           sy -= 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -682,6 +742,9 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -691,6 +754,9 @@ function rookBehaviour(x,y,arr,board) {
         sx -= 1
         if(sx < 5) {
           sy -= 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -704,6 +770,9 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
@@ -713,6 +782,9 @@ function rookBehaviour(x,y,arr,board) {
         sx -= 1
         if(sx >= 5) {
           sy += 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
           continue
@@ -726,6 +798,9 @@ function rookBehaviour(x,y,arr,board) {
       sx = x
       sy = y
       for(var j = 0; j < 12; j++) {
+        if(sx < 0 || sx > 10) {
+          continue
+        }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           if(x==0) {
             console.log(1)
@@ -741,6 +816,9 @@ function rookBehaviour(x,y,arr,board) {
         sx += 1
         if(sx <= 5) {
           sy += 1 
+        }
+        if(sx < 0 || sx > 10) {
+          continue
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           if(x==0) {
