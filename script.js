@@ -64,59 +64,78 @@ hexpositions = []
 bS = 40 //boardSize
 
 function drawBoard() {
-  hexpositions = []
-  bS = 40
-  var adjustment = 0.3 //moves the board up and down, 0.3 keeps it mostly centered
-  ctx.fillStyle = '#bbb'
-  ctx.rect(0,0,c.width,c.height)
-  ctx.fill()
-    for(var j = 0; j <= 10; j++) {
-    hexpositions.push([])
+  hexpositions = [];
+  var marginPercentage = 0; // 15% margin on each side
+
+  // Function to check if the board fits on the screen with the given bS value
+  function isBoardFitting(bS) {
+    var widthNeeded = ((bS * 1.5 - 0.5) * 11) + (2 * bS * Math.sqrt(3));
+    var heightNeeded = (bS * (12.6666666 + 0.3)) + (6 * bS * Math.sqrt(3));
+    return (widthNeeded <= c.width - (c.width * marginPercentage) && heightNeeded <= c.height - (c.height * marginPercentage));
+  }
+
+  // Find the maximum possible bS value that fits the board on the screen
+  var maxBS = Math.min(c.width / ((1.5 * 11) + (2 * Math.sqrt(3))), c.height / (12.6666666 + 0.3 + (6 * Math.sqrt(3))));
+  bS = maxBS;
+
+  // Keep reducing bS until the board fits on the screen
+  while (!isBoardFitting(bS)) {
+    bS--;
+  }
+
+  var adjustment = 0.3; // moves the board up and down, 0.3 keeps it mostly centered
+  ctx.fillStyle = '#bbb';
+  ctx.rect(0, 0, c.width, c.height);
+  ctx.fill();
+
+  for (var j = 0; j <= 10; j++) {
+    hexpositions.push([]);
     var firstcolor = j % 3;
-    if(j <= 5) {
-      for(var i = 0; i < 6+j; i++) {
-        columnX = (c.width/2)-(((bS*1.5)-0.5)*(5-j))
-        startingY = (c.height/2)-(bS*(4+adjustment))-(((bS*Math.sqrt(3))/2)*j)
-        color = (firstcolor + i) % 3
-        if(color == 0) {
-          ctx.fillStyle = 'white'
-        } else if(color == 1) {
-          ctx.fillStyle = 'gray'
+    if (j <= 5) {
+      for (var i = 0; i < 6 + j; i++) {
+        columnX = (c.width / 2) - (((bS * 1.5) - 0.5) * (5 - j));
+        startingY = (c.height / 2) - (bS * (4 + adjustment)) - (((bS * Math.sqrt(3)) / 2) * j);
+        color = (firstcolor + i) % 3;
+        if (color == 0) {
+          ctx.fillStyle = 'white';
+        } else if (color == 1) {
+          ctx.fillStyle = 'gray';
         } else {
-          ctx.fillStyle = 'black'
+          ctx.fillStyle = 'black';
         }
-        drawHexagon(columnX,startingY+(i*(bS*Math.sqrt(3))),bS,0)
-        hexpositions[j].push([columnX,startingY+(i*(bS*Math.sqrt(3)))])
+        drawHexagon(columnX, startingY + (i * (bS * Math.sqrt(3))), bS, 0);
+        hexpositions[j].push([columnX, startingY + (i * (bS * Math.sqrt(3)))]);
       }
     } else {
-      for (var i = 0; i < 16-j; i++) {
-        columnX = (c.width / 2) + (((bS*1.5)-0.5)*(j-5))
-        startingY = (c.height / 2) - (bS*(12.6666666+adjustment)) + (((bS*Math.sqrt(3))/2) * (6 + (j - 6)));
-        if(i == 0) {
-          color = (firstcolor + i) % 3
-          if(color == 0) {
-            ctx.fillStyle = 'gray'
-          } else if(color == 1) {
-            ctx.fillStyle = 'white'
+      for (var i = 0; i < 16 - j; i++) {
+        columnX = (c.width / 2) + (((bS * 1.5) - 0.5) * (j - 5));
+        startingY = (c.height / 2) - (bS * (12.6666666 + adjustment)) + (((bS * Math.sqrt(3)) / 2) * (6 + (j - 6)));
+        if (i == 0) {
+          color = (firstcolor + i) % 3;
+          if (color == 0) {
+            ctx.fillStyle = 'gray';
+          } else if (color == 1) {
+            ctx.fillStyle = 'white';
           } else {
-            ctx.fillStyle = 'black'
+            ctx.fillStyle = 'black';
           }
         } else {
-          color = (firstcolor + i + j) % 3
-          if(color == 0) {
-            ctx.fillStyle = 'gray'
-          } else if(color == 1) {
-            ctx.fillStyle = 'black'
+          color = (firstcolor + i + j) % 3;
+          if (color == 0) {
+            ctx.fillStyle = 'gray';
+          } else if (color == 1) {
+            ctx.fillStyle = 'black';
           } else {
-            ctx.fillStyle = 'white'
+            ctx.fillStyle = 'white';
           }
         }
-        drawHexagon(columnX, startingY + (i * (bS*Math.sqrt(3))), bS, 0);
-        hexpositions[j].push([columnX,startingY+(i*(bS*Math.sqrt(3)))])
+        drawHexagon(columnX, startingY + (i * (bS * Math.sqrt(3))), bS, 0);
+        hexpositions[j].push([columnX, startingY + (i * (bS * Math.sqrt(3)))]);
       }
     }
   }
-} //draws background color and hexagonal board pieces
+}
+//draws background color and hexagonal board pieces
 drawBoard()
 
 //0 empty
@@ -224,6 +243,7 @@ function drawBoardState() {
         }
 
         var pieceSize = bS * sizeRatio; // Calculate the size of the pieces
+        console.log(bS)
         var height = pieceSize / piece.aspectRatio; // Calculate the height based on the aspect ratio
         var centerX = hexpositions[i][j][0] - pieceSize / 2;
         var centerY = hexpositions[i][j][1] - height / 2;
