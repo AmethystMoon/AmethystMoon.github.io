@@ -793,7 +793,7 @@ function bishopBehaviourAlteredForKing(x,y,arr,board) {
         if(sx <= 4) {
           sx += 1
           sy += 2
-        } else if(sx >= 6) {
+        } else if(sx >= 5) {
           sx += 1
           sy += 1
         }
@@ -877,10 +877,10 @@ function bishopBehaviour(x,y,arr,board) {
           sy -= 2
         }
       } else if(i == 3) { //going southeast
-        if(sx <= 5) {
+        if(sx <= 4) {
           sx += 1
           sy += 2
-        } else if(sx >= 6) {
+        } else if(sx >= 5) {
           sx += 1
           sy += 1
         }
