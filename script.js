@@ -176,7 +176,7 @@ function createInitialBoardState() {
   boardState[7] = [0,0,0,0,0,0,1,0,0]
   boardState[8] = [0,2,9,0,0,0,1,0]
   boardState[9] = [0,0,0,0,0,0,1]
-  boardState[10] = [0,0,0,0,0,0] */
+  boardState[10] = [0,0,0,0,0,0]  */
 }
 createInitialBoardState()
 
@@ -803,13 +803,11 @@ function rookBehaviour(x,y,arr,board) {
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           if(x==0) {
-            console.log(1)
           }
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
           if(x==0) {
-            console.log(2)
           }
           continue
         }
@@ -822,13 +820,11 @@ function rookBehaviour(x,y,arr,board) {
         }
         if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           if(x==0) {
-            console.log(3)
           }
           continue
         }
         if((board[sx][sy] % 2 == tmod && (sx !== x || sy !== y)) && board[sx][sy] !== 0) {
           if(x==0) {
-            console.log(4)
           }
           continue
         }
@@ -1146,34 +1142,43 @@ function detectCheck(board) {
 }
 function detectCheckmate(board) {
   let tmod = (turn === 'white') ? 1 : 0;
+  console.log(tmod)
   allpossiblemoves = []
+  console.log("Next")
   for(var i = 0; i < board.length; i++) {
     for(var j = 0; j < board[i].length; j++) {
       let possiblemoves = [];
       type = board[i][j]
       // Call the appropriate behaviour function based on the piece type
-      if(type === 1 || type === 2 && type % 2 == tmod) { //pawn behavior
+      if((type === 1 || type === 2) && type % 2 == tmod) { //pawn behavior
+        console.log("Piece " + [i,j].toString())
         pawnBehaviour(i, j, possiblemoves,board);
       }
-      if(type === 3 || type === 4 && type % 2 == tmod) { //bishop behavior
+      if((type === 3 || type === 4) && type % 2 == tmod) { //bishop behavior
+        console.log("Piece " + [i,j].toString())
         bishopBehaviour(i, j, possiblemoves,board);
       }
-      if(type === 5 || type === 6 && type % 2 == tmod) { //knight behavior
+      if((type === 5 || type === 6) && type % 2 == tmod) { //knight behavior
+        console.log("Piece " + [i,j].toString())
         knightBehaviour(i, j, possiblemoves,board);
       }
-      if(type === 7 || type === 8 && type % 2 == tmod) { //rook behavior
+      if((type === 7 || type === 8) && type % 2 == tmod) { //rook behavior\
+        console.log("Piece " + [i,j].toString())
         rookBehaviour(i, j, possiblemoves,board);
       }
-      if(type === 9 || type === 10 && type % 2 == tmod) { //queen behavior
+      if((type === 9 || type === 10) && type % 2 == tmod) { //queen behavior
+        console.log("Piece " + [i,j].toString())
         queenBehaviour(i, j, possiblemoves,board);
       }
-      if(type === 11 || type === 12 && type % 2 == tmod) { //king behavior
+      if((type === 11 || type === 12) && type % 2 == tmod) { //king behavior
+        console.log("Piece " + [i,j].toString())
         kingBehaviour(i, j, possiblemoves,board);
       }
 
       if(detectCheck(board)) {
         possiblemoves = filterMovementsInCheck(i,j,possiblemoves)
       }
+      console.log(possiblemoves)
       allpossiblemoves = allpossiblemoves.concat(possiblemoves);
     }
   }
