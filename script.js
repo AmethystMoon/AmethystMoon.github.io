@@ -806,7 +806,7 @@ function rookBehaviour(x,y,arr,board) {
         if(sx < 0 || sx > 10) {
           continue
         }
-        if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] !== 0 && (sx !== x || sy !== y)) {
@@ -819,7 +819,7 @@ function rookBehaviour(x,y,arr,board) {
         if(sx < 0 || sx > 10) {
           continue
         }
-        if(sy > board[sx].length-2 || sy < 0 || sx < 0 || sx > 10) {
+        if(sy > board[sx].length-1 || sy < 0 || sx < 0 || sx > 10) {
           continue
         }
         if(board[sx][sy] % 2 == tmod && (sx !== x || sy !== y) && board[sx][sy] !== 0) {
