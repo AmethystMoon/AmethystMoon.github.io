@@ -1458,7 +1458,6 @@ function pawnPromotion() {
       ctx.roundRect(hexpositions[i][0][0] - 85, rectY, 170, rectHeight, 5);
       ctx.fill();
 
-      // Calculate the width of each piece to be drawn (divide rect width by 6) maintaining the aspect ratio
       var pieceWidth = rectWidth / 6;
       var pieceHeight;
 
@@ -1471,7 +1470,6 @@ function pawnPromotion() {
       for (var j = 0; j < 4; j++) {
         pieceHeight = pieceWidth / pieces[pieceIndexes[j]].aspectRatio; 
 
-        // Calculate the X position for each piece, spacing them evenly within the rect
         var pieceX = rectX + xOffset + j * (pieceWidth * 2); 
         var pieceY = rectY + (rectHeight - pieceHeight) / 2;
 
@@ -1520,8 +1518,7 @@ function pawnPromotion() {
       for (var j = 0; j < 4; j++) {
         pieceHeight = pieceWidth / pieces[pieceIndexes[j]].aspectRatio; 
 
-        // Calculate the X position for each piece, spacing them evenly within the rect
-        var pieceX = rectX + xOffset + j * (pieceWidth * 2); // Multiply by 2 to add a gap of pieceWidth between each piece
+        var pieceX = rectX + xOffset + j * (pieceWidth * 2); 
         var pieceY = rectY + (rectHeight - pieceHeight) / 2; 
           
         var scaleFactor = hoveredPiece === pieceIndexes[j] ? 1.2 : 1;
