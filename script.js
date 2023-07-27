@@ -14,8 +14,6 @@ exitFullScreenIcon.src = 'Icons/exitfullscreen.png';
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    // You might want to redraw your canvas content after the resize here.
 }
 window.addEventListener('resize', resizeCanvas);
 function drawHexagon(x, y, sideLength, rotation) {
@@ -41,21 +39,19 @@ function drawHexagon(x, y, sideLength, rotation) {
 }
 
 function drawFullScreenIcon() {
-  var iconSize = 50;  // Adjust this value to change the size of the icon
-  var margin = 10;  // Margin from the bottom right corner
+  var iconSize = 50;  
+  var margin = 10; 
   var icon = document.fullscreenElement ? exitFullScreenIcon : fullScreenIcon;
   var rectX = c.width - iconSize - margin;
   var rectY = c.height - iconSize - margin;
-  var radius = 5;  // Adjust this value to change the roundness of the corners
+  var radius = 5;  
 
-  // Draw the background rectangle
   ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';  // Semi-transparent black
   ctx.beginPath();
   ctx.roundRect(rectX + 5, rectY + 5, iconSize - 10, iconSize - 10, radius);
   ctx.fill();
 
-  // Draw the icon
-  ctx.beginPath()
+ctx.beginPath()
   ctx.fillStyle = 'rgba(255,255,255,1)'
   ctx.drawImage(icon, rectX, rectY, iconSize, iconSize);
 }
@@ -67,18 +63,15 @@ function drawBoard() {
   hexpositions = [];
   var marginPercentage = 0; // 15% margin on each side
 
-  // Function to check if the board fits on the screen with the given bS value
   function isBoardFitting(bS) {
     var widthNeeded = ((bS * 1.5 - 0.5) * 11) + (2 * bS * Math.sqrt(3));
     var heightNeeded = (bS * (12.6666666 + 0.3)) + (6 * bS * Math.sqrt(3));
     return (widthNeeded <= c.width - (c.width * marginPercentage) && heightNeeded <= c.height - (c.height * marginPercentage));
   }
 
-  // Find the maximum possible bS value that fits the board on the screen
   var maxBS = Math.min(c.width / ((1.5 * 11) + (2 * Math.sqrt(3))), c.height / (12.6666666 + 0.3 + (6 * Math.sqrt(3))));
   bS = maxBS;
 
-  // Keep reducing bS until the board fits on the screen
   while (!isBoardFitting(bS)) {
     bS--;
   }
@@ -135,7 +128,7 @@ function drawBoard() {
     }
   }
 }
-//draws background color and hexagonal board pieces
+
 drawBoard()
 
 //0 empty
@@ -203,17 +196,16 @@ pieces = []
 function createPieceReferences() {
   var pieceNames = ['WhitePawn', 'BlackPawn', 'WhiteBishop', 'BlackBishop', 'WhiteKnight', 'BlackKnight', 'WhiteRook', 'BlackRook', 'WhiteQueen', 'BlackQueen', 'WhiteKing', 'BlackKing'];
 
-  var loadedImages = 0; // Keep track of the number of loaded images
+  var loadedImages = 0; 
 
   for (var i = 0; i < pieceNames.length; i++) {
     var piece = new Image();
     piece.src = 'ChessPiece/' + pieceNames[i] + '.png';
 
     piece.onload = function() {
-      this.aspectRatio = this.width / this.height; // Calculate and store the aspect ratio
-      loadedImages++; // Increment the count when an image is loaded
+      this.aspectRatio = this.width / this.height; 
+      loadedImages++;
 
-      // If all images are loaded, draw the board state
       if (loadedImages === pieceNames.length) {
         drawBoardState();
       }
@@ -221,12 +213,12 @@ function createPieceReferences() {
 
     pieces.push(piece);
   }
-} //note this also calls the initial drawBoardState()
+} //remember this also calls the initial drawBoardState()
 
-var hoveredTile = null; // Add this variable to track the hovered tile
+var hoveredTile = null;
 function drawBoardState() {
-  var pieceSizeRatio = 0.8; // Adjust this value to change the size of the pieces
-  ctx.clearRect(0, 0, c.width, c.height); // Clear the canvas before redrawing
+  var pieceSizeRatio = 0.8;
+  ctx.clearRect(0, 0, c.width, c.height); 
   drawBoard();
   for (var i = 0; i <= 10; i++) {
     for (var j = 0; j < boardState[i].length; j++) {
@@ -234,17 +226,15 @@ function drawBoardState() {
         var piece = pieces[boardState[i][j] - 1];
         var sizeRatio = pieceSizeRatio;
 
-        // Check if the mouse is over this tile
         if (hoveredTile && hoveredTile[0] == i && hoveredTile[1] == j) {
-          // Check if the piece is the correct color for the current turn
           if ((turn === "white" && boardState[i][j] % 2 === 1) || (turn === "black" && boardState[i][j] % 2 === 0)) {
-            sizeRatio = 1; // Adjust this value to change the size of the hovered piece
+            sizeRatio = 1; 
           }
         }
 
-        var pieceSize = bS * sizeRatio; // Calculate the size of the pieces
+        var pieceSize = bS * sizeRatio; 
         console.log(bS)
-        var height = pieceSize / piece.aspectRatio; // Calculate the height based on the aspect ratio
+        var height = pieceSize / piece.aspectRatio;
         var centerX = hexpositions[i][j][0] - pieceSize / 2;
         var centerY = hexpositions[i][j][1] - height / 2;
         ctx.drawImage(piece, centerX, centerY, pieceSize, height);
@@ -1249,7 +1239,7 @@ function kingBehaviour(i, j, moves,board) {
   bishopBehaviourAlteredForKing(i, j, moves,board);
 }
 
-function cleanValidMoves(arr) { //it would be better if the movement functions worked but i really dont want to go into that again
+function cleanValidMoves(arr) { //it would be better if the movement functions worked but. eh
   for(j = 0; j < 10; j++) {
     for(i = 0; i < arr.length; i++) {
       mov = arr[i]
@@ -1331,7 +1321,6 @@ c.addEventListener('mousemove', function(event) {
   for (var i = 0; i < piecePositions.length; i++) {
     var piece = piecePositions[i];
     if (x >= piece.x && x <= piece.x + piece.width && y >= piece.y && y <= piece.y + piece.height) {
-      // Mouse is over this piece
       hoveredPiece = piece.index;
       break;
     }
@@ -1342,7 +1331,6 @@ c.addEventListener('mousemove', function(event) {
   var rectX = c.width - 50 - 10;
   var rectY = c.height - 50 - 10;
   if (x >= rectX && x <= rectX + 50 && y >= rectY && y <= rectY + 50) {
-    // Mouse is over the full screen icon
     hoveredFullScreenIcon = true;
   } else {
     hoveredFullScreenIcon = false;
@@ -1357,7 +1345,6 @@ c.addEventListener('click', function(event) {
   for (var i = 0; i < piecePositions.length; i++) {
     var piece = piecePositions[i];
     if (x >= piece.x && x <= piece.x + piece.width && y >= piece.y && y <= piece.y + piece.height) {
-      // Click was on this piece
       // Clear all piece positions to remove the promotion choices
       piecePositions = [];
       promotionInProgress = false;
@@ -1365,7 +1352,6 @@ c.addEventListener('click', function(event) {
       // Find the pawn and update its position
       for (var j = 0; j < 10; j++) {
         if (boardState[j][0] == 1) {
-          // Update the boardState to reflect the new piece
           boardState[j][0] = piece.index+1;
           break;
         } else if(boardState[j][boardState[j].length-1] == 2) {
@@ -1413,7 +1399,6 @@ c.addEventListener('click', function(event) {
   }
   if (tile) {
     var piece = boardState[tile[0]][tile[1]];
-    // Check if a piece of the correct color was clicked
     if (piece != 0 && ((turn == 'white' && piece % 2 == 1) || (turn == 'black' && piece % 2 == 0))) {
       selectedPiece = tile;
     } else {
@@ -1441,8 +1426,8 @@ function drawCheckmateScreen() {
     ctx.beginPath()
     ctx.fillStyle = 'rgb(255,255,255)'
     ctx.font = "30px Arial"
-    ctx.textAlign = "center"; // add this line
-    ctx.textBaseline = "middle"; // add this line
+    ctx.textAlign = "center"; 
+    ctx.textBaseline = "middle";
     if(turn == 'white') {
       ctx.fillText('Black' + " won by checkmate", c.width / 2, c.height / 2)
     } else {
@@ -1458,8 +1443,6 @@ var piecePositions = [];
 var hoveredPiece = null;
 
 function pawnPromotion() {
-  // Array indexes for 'White Bishop', 'White Knight', 'White Rook', and 'White Queen'
-
   for(i = 0; i < 10; i++) {
     if(boardState[i][0] == 1) {
       var pieceIndexes = [2, 4, 6, 8];
@@ -1479,29 +1462,25 @@ function pawnPromotion() {
       var pieceWidth = rectWidth / 6;
       var pieceHeight;
 
-      // Calculate the total width of all pieces plus gaps
       var totalWidth = pieceWidth * 4 + pieceWidth * (4 - 1);
 
-      // Calculate the offset to center the images
       var xOffset = (rectWidth - totalWidth) / 1.8;
 
-      piecePositions = []; // Clear the piece positions at the start of each frame
+      piecePositions = [];
 
       for (var j = 0; j < 4; j++) {
-        pieceHeight = pieceWidth / pieces[pieceIndexes[j]].aspectRatio; // Calculate height maintaining aspect ratio
+        pieceHeight = pieceWidth / pieces[pieceIndexes[j]].aspectRatio; 
 
         // Calculate the X position for each piece, spacing them evenly within the rect
-        var pieceX = rectX + xOffset + j * (pieceWidth * 2); // Multiply by 2 to add a gap of pieceWidth between each piece
-        var pieceY = rectY + (rectHeight - pieceHeight) / 2; // Center the image vertically within the rect
+        var pieceX = rectX + xOffset + j * (pieceWidth * 2); 
+        var pieceY = rectY + (rectHeight - pieceHeight) / 2;
 
-        // Determine whether to scale the piece based on whether it is being hovered over
         var scaleFactor = hoveredPiece === pieceIndexes[j] ? 1.2 : 1;
         var newWidth = pieceWidth * scaleFactor;
         var newHeight = pieceHeight * scaleFactor;
         var newX = pieceX - (newWidth - pieceWidth) / 2;
         var newY = pieceY - (newHeight - pieceHeight) / 2;
 
-        // Draw the piece
         ctx.drawImage(pieces[pieceIndexes[j]], newX, newY, newWidth, newHeight);
         
         piecePositions.push({
@@ -1527,33 +1506,30 @@ function pawnPromotion() {
       ctx.roundRect(hexpositions[i][boardState[i].length-1][0] - 85, rectY, 170, rectHeight, 5);
       ctx.fill();
 
-      // Calculate the width of each piece to be drawn (divide rect width by 6) maintaining the aspect ratio
+
       var pieceWidth = rectWidth / 6;
       var pieceHeight;
 
       // Calculate the total width of all pieces plus gaps
       var totalWidth = pieceWidth * 4 + pieceWidth * (4 - 1);
 
-      // Calculate the offset to center the images
       var xOffset = (rectWidth - totalWidth) / 1.8;
 
-      piecePositions = []; // Clear the piece positions at the start of each frame
+      piecePositions = []; 
 
       for (var j = 0; j < 4; j++) {
-        pieceHeight = pieceWidth / pieces[pieceIndexes[j]].aspectRatio; // Calculate height maintaining aspect ratio
+        pieceHeight = pieceWidth / pieces[pieceIndexes[j]].aspectRatio; 
 
         // Calculate the X position for each piece, spacing them evenly within the rect
         var pieceX = rectX + xOffset + j * (pieceWidth * 2); // Multiply by 2 to add a gap of pieceWidth between each piece
-        var pieceY = rectY + (rectHeight - pieceHeight) / 2; // Center the image vertically within the rect
-
-        // Determine whether to scale the piece based on whether it is being hovered over
+        var pieceY = rectY + (rectHeight - pieceHeight) / 2; 
+          
         var scaleFactor = hoveredPiece === pieceIndexes[j] ? 1.2 : 1;
         var newWidth = pieceWidth * scaleFactor;
         var newHeight = pieceHeight * scaleFactor;
         var newX = pieceX - (newWidth - pieceWidth) / 2;
         var newY = pieceY - (newHeight - pieceHeight) / 2;
 
-        // Draw the piece
         ctx.drawImage(pieces[pieceIndexes[j]], newX, newY, newWidth, newHeight);
         
         piecePositions.push({
